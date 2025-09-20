@@ -1,7 +1,7 @@
 function createProductCard(ad) {
   return `
      <div class="d_flex single_cat_art_main width_1280 flex_1 b2e0090c f_dir_column ad_card">
-          <a href="../pages/single-card.html" onclick='saveProduct(${JSON.stringify(
+          <a onclick='saveProduct(${JSON.stringify(
             ad
           )})'>
             <img src="${ad.thumbnail}" alt="${ad.title}" />
@@ -32,6 +32,13 @@ function createProductCard(ad) {
 function saveProduct(ad) {
   localStorage.removeItem("selectedProduct"); // purana data remove
   localStorage.setItem("selectedProduct", JSON.stringify(ad));
+  if (window.location.pathname.includes("/pages/")) {
+    // Agar already pages/ folder me ho (category.html)
+    window.location.href = "single-card.html";
+  } else {
+    // Agar root me ho (index.html)
+    window.location.href = "pages/single-card.html";
+  }
 }
 
 async function fetchAllProducts() {
