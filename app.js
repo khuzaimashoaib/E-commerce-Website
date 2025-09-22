@@ -1,9 +1,7 @@
 function createProductCard(ad) {
   return `
      <div class="d_flex single_cat_art_main width_1280 flex_1 b2e0090c f_dir_column ad_card">
-          <a onclick='saveProduct(${JSON.stringify(
-            ad
-          )})'>
+          <a onclick='saveProduct(${JSON.stringify(ad)})'>
             <img src="${ad.thumbnail}" alt="${ad.title}" />
             <div class="card-content">
               <div class="d_flex jc_space_between _371e9918 price">
@@ -28,17 +26,79 @@ function createProductCard(ad) {
         </div>
   `;
 }
+function createSingleProductCard(product) {
+  return `
+    <div class="product-image d_flex">
+      <img
+        src="${product.images[0]}"
+        alt="${product.title}"
+      />
+    </div>
+    <div class="product-content">
+      <h1 class="product-title">${product.title}</h1>
+      <p class="product-description">
+        ${product.description || ""}
+      </p>
+      <div class="product-info">
+        <span class="price">Price: $${product.price}</span>
+      </div>
+
+      <span class="sku">SKU: ${product.id}</span>
+      <div class="product-meta">
+        <span class="brand">Brand: ${product.brand || "Unknown"}</span>
+        <span class="category">Category: ${product.category}</span>
+        <span class="tags">Tags: ${product.tags || "N/A"}</span>
+      </div>
+      <div class="product-rating">Rating: ⭐${product.rating}</div>
+
+      <div class="quantity-selector">
+        <input type="number" value="1" min="1" />
+      </div>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+  <div class="product_card d_flex f_dir_column ">
+        <div class="product_card_header">
+          <div class="product_card_avatar d_flex">
+            <div>
+              <img
+                src="https://www.olx.com.pk/assets/iconProfilePicture_noinline.6327fd8895807f09fafb0ad1e3d99b83.svg"
+                alt=""
+              />
+            </div>
+            <div class="product_card_user_info d_flex">
+              <small>Posted by</small>
+              <h4>Anonymous</h4>
+            </div>
+          </div>
+          <div class="card_divider"></div>
+          <div class="product_card_details d_flex">
+            <div class="product_card_detail">
+              📅 Member Since <span>2018</span>
+            </div>
+            <div class="product_card_detail">📰 Active Ads <span>1</span></div>
+          </div>
+        </div>
+
+        <button class="product_card_btn">📞 Show phone number</button>
+        <button class="product_card_chat_btn">💬 Chat</button>
+
+        <div class="product_card_footer">
+          <div>Ad ID: ${product.id}</div>
+          <a href="#">Report this ad</a>
+        </div>
+      </div>
+        `;
+}
 
 function saveProduct(ad) {
   localStorage.removeItem("selectedProduct"); // purana data remove
   localStorage.setItem("selectedProduct", JSON.stringify(ad));
-  if (window.location.pathname.includes("/pages/")) {
-    // Agar already pages/ folder me ho (category.html)
-    window.location.href = "single-card.html";
-  } else {
-    // Agar root me ho (index.html)
-    window.location.href = "pages/single-card.html";
-  }
+
+  const pathName = window.location.pathname;
+
+  window.location.href = pathName.includes("/pages/")
+    ? "single-card.html"
+    : "pages/single-card.html";
 }
 
 async function fetchAllProducts() {
@@ -101,36 +161,7 @@ function renderSingleProduct() {
 
   const product = JSON.parse(productData);
 
-  container.innerHTML = `
-    <div class="product-image d_flex">
-      <img
-        src="${product.images[0]}"
-        alt="${product.title}"
-      />
-    </div>
-    <div class="product-content">
-      <h1 class="product-title">${product.title}</h1>
-      <p class="product-description">
-        ${product.description || ""}
-      </p>
-      <div class="product-info">
-        <span class="price">Price: $${product.price}</span>
-      </div>
-
-      <span class="sku">SKU: ${product.id}</span>
-      <div class="product-meta">
-        <span class="brand">Brand: ${product.brand || "Unknown"}</span>
-        <span class="category">Category: ${product.category}</span>
-        <span class="tags">Tags: ${product.tags || "N/A"}</span>
-      </div>
-      <div class="product-rating">Rating: ⭐${product.rating}</div>
-
-      <div class="quantity-selector">
-        <input type="number" value="1" min="1" />
-      </div>
-      <button class="add-to-cart">Add to Cart</button>
-    </div>
-  `;
+  container.innerHTML = createSingleProductCard(product);
 }
 
 window.addEventListener("pageshow", renderSingleProduct);
