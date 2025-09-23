@@ -194,8 +194,9 @@ body,
 .e5a06375 {
   display: flex;
 }
-.follow_us_section > :last-child {
-  margin-top: 38px;
+.follow_us_section  {
+  /* margin-top: 3px; */
+  gap: 16px;
 }
 .social_links,
 .store_links {
@@ -207,9 +208,10 @@ body,
 }
 
 .b223cc14 img,
-._59ec696e img {
+._59ec696e img
+ {
   height: 24px;
-}
+ }
 
 .footer_bottom {
   background-color: #002f34;
