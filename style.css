@@ -655,6 +655,75 @@ body,
   font-weight: 500;
 }
 
+.contact_card {
+  width: 100%;
+  max-width: 1280px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  overflow: hidden;
+  margin: 40px auto;
+}
+.contact_card_left,
+.contact_card_right {
+  flex: 1 1 300px;
+  padding: 30px;
+}
+.contact_card_left {
+background: linear-gradient(135deg, #005963, #0ea5a4);
+
+
+  justify-content: center;
+}
+.contact_card_left h2 {
+  margin: 0 0 15px;
+  font-size: 24px;
+  color: #fff;
+}
+.contact_card_left p {
+  color: #fff;
+  margin: 5px 0;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+}
+.contact_card_right h3 {
+  font-size: 22px;
+  color: #111827;
+}
+.contact_card_right form {
+  gap: 15px;
+  margin-top: 15px;
+}
+.contact_card_right input,
+.contact_card_right textarea {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 15px;
+}
+.contact_card_right textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+.contact_card_right button {
+  background: #0ea5a4;
+  border: none;
+  padding: 14px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.contact_card_right button:hover {
+  background: #005963;
+}
+
 @media only screen and (max-width: 1280px) {
   ._8b72864b {
     display: none;
@@ -713,6 +782,11 @@ body,
 
   .product-card {
     margin: 40px 16px;
+  }
+  .contact_card {
+    flex-direction: column-reverse;
+    width: calc(100% - 40px); /* margin ke hisaab se adjust */
+    margin: 20px;
   }
 }
 

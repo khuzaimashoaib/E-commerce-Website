@@ -26,6 +26,7 @@ function createProductCard(ad) {
         </div>
   `;
 }
+
 function createSingleProductCard(product) {
   return `
     <div class="product-image d_flex">
